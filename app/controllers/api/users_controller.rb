@@ -9,4 +9,37 @@ class Api::UsersController < ApplicationController
             head 404
         end
     end
+    def create
+        begin
+            user = User.new(user_params)
+            
+            if user.save
+                render json: user, status: 201
+            else
+                render json: { errors: user.errors }, status: 422
+            end
+        rescue
+            head 404
+        end
+    end
+    def update
+        user = User.find(params[:id])
+        
+        if user.update(user_params)
+            render json: user, status: 200
+        else
+            render json: { errors: user.errors }, status: 422
+        end
+    end
+    def destroy
+        user = User.find(params[:id])
+        
+        user.destroy
+       
+        head 204
+    end
+
+    def user_params
+        params.require(:user).permit(:email, :password, :password_confirmation)
+    end
 end

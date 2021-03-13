@@ -35,6 +35,11 @@ class Api::TasksController < ApplicationController
         head 204
     end
 
+    def all_public_tasks
+        tasks = Task.find_by(is_visible: true)
+        render json: {tasks: tasks}, status: 200
+    end
+
     private
     def task_params
         params.require(:task).permit(:title, :description, :status, :is_visible)

@@ -1,4 +1,5 @@
 class Api::UsersController < ApplicationController
+    respond_to :json
 
     def show
         begin
@@ -8,5 +9,4 @@ class Api::UsersController < ApplicationController
             head 404
         end
     end
-
 end

@@ -1,6 +1,6 @@
 class Api::SessionsController < ApplicationController
     def create
-        user = user.find_by(email: session_params[:email])
+        user = User.find_by(email: session_params[:email])
 
         if user && user.valid_password?(session_params[:password])
             sign_in user, store: false
@@ -14,9 +14,13 @@ class Api::SessionsController < ApplicationController
 
     def destroy
         user = User.find_by(auth_token: params[:id])
-        user.generate_authentication_token!
-        user.save
-        head 204
+        if user
+            user.generate_authentication_token!
+            user.save
+            head 204
+        else
+            head 404
+        end
     end
 
     private

@@ -2,7 +2,10 @@ class Api::TasksController < ApplicationController
     before_action :authenticate_with_token!
 
     def index
+        # Atribuicao para filtrar tasks do usuario logado com paramentros enviados (ex: /tasks/?status=0&is_visible=1)
+        params[:user_id] = current_user.id
         @tasks = TaskReduce.apply(params)
+
         render json: @tasks, status: 200
     end
 
@@ -24,6 +27,7 @@ class Api::TasksController < ApplicationController
     def update
         task = current_user.tasks.find(params[:id])
 
+        # Verificacao necessaria para nao permitir a atualizacao de atividades ja concluidas
         if task.status
             render json: { errors: 'Erro! tarefa já concluída'}, status: 422
         else
@@ -44,16 +48,11 @@ class Api::TasksController < ApplicationController
 
     # Responsável por retornar toas as tarefas públicas
     def all_public_tasks
-        # Verifiação se existe um usuario logado
-        if current_user
-            # Filtro e tarefas somente visíveis (publicas)
-            params[:is_visible] = true
-            @tasks = TaskReduce.apply(params)
+        # Atribuicao para filtrar tarefas somente visíveis (publicas)
+        params[:is_visible] = true
+        @tasks = TaskReduce.apply(params)
 
-            render json: @tasks, status: 200
-        else
-            head 401
-        end
+        render json: @tasks, status: 200
     end
 
     private
@@ -61,9 +60,10 @@ class Api::TasksController < ApplicationController
         params.require(:task).permit(:title, :description, :status, :is_visible)
     end
 
-    # Filtro de tasks com parametros (ex: /tasks/?status=0) 
+    # Filtro de tasks com parametros (ex: /tasks/?status=0)
     TaskReduce = Rack::Reducer.new(
     Task.all,
+    ->(user_id:) { where(user_id: user_id) },
     ->(status:) { where(status: status) },
     ->(is_visible:) { where(is_visible: is_visible) },
   )

@@ -36,8 +36,12 @@ class Api::TasksController < ApplicationController
     end
 
     def all_public_tasks
-        tasks = Task.find_by(is_visible: true)
-        render json: {tasks: tasks}, status: 200
+        if current_user
+            tasks = Task.find_by(is_visible: true)
+            render json: {tasks: tasks}, status: 200
+        else
+            head 401
+        end
     end
 
     private

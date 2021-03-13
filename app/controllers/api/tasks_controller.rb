@@ -21,11 +21,15 @@ class Api::TasksController < ApplicationController
     end
     def update
         task = current_user.tasks.find(params[:id])
-        
-        if task.update_attributes(task_params)
-            render json: task, status: 200
+
+        if task.status
+            render json: { errors: 'Erro! tarefa já concluída'}, status: 422
         else
-            render json: { errors: task.errors }, status: 422
+            if task.update_attributes(task_params)
+                render json: task, status: 200
+            else
+                render json: { errors: task.errors }, status: 422
+            end
         end
     end
     def destroy

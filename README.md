@@ -4,7 +4,7 @@ The setups steps expect following tools installed on the system.
 
 - Github
 - Ruby 2.4.0
-- Rails 6.0.2
+- Rails 6.x
 - MySQL
 
 ##### 1. Check out the repository

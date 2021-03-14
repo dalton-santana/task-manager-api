@@ -28,11 +28,14 @@ class Api::UsersController < ApplicationController
     end
     def update
         user = current_user
-        
-        if user.update(user_params)
-            render json: user, status: 200
+        if current_user.id.to_i == params[:id].to_i
+            if user.update(user_params)
+                render json: user, status: 200
+            else
+                render json: { errors: user.errors }, status: 422
+            end
         else
-            render json: { errors: user.errors }, status: 422
+            head 401
         end
     end
     def destroy

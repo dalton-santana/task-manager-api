@@ -49,5 +49,12 @@ rails server
 And now you can visit the site with the URL http://localhost:3000
 
 
-### * Tests
-"Os testes foi a parte que tive mais dificuldade para colocar em prática por causa do tempo de estudo dessa etapa, foquei em desenvolver a API com os requisitos que necessitavam ter no desafio." 
+##### 6. Tests 
+ "Os testes foi a parte que tive mais dificuldade para colocar em prática por causa do tempo de estudo dessa etapa, foquei em desenvolver a API com os requisitos necessários do desafio." 
+
+
+##### 7. Routes (Insomnia)
+
+[Download](https://drive.google.com/file/d/10BF5GVFa2wfm-WeBcZo1f0Zpba2DHDG7/view?usp=sharing)
+
+

@@ -1,24 +1,53 @@
-# README
+##### Prerequisites
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The setups steps expect following tools installed on the system.
 
-Things you may want to cover:
+- Github
+- Ruby 2.4.0
+- Rails 6.0.2
+- MySQL
 
-* Ruby version
+##### 1. Check out the repository
 
-* System dependencies
+```bash
+git clone git@github.com:dalton-santana/task-manager-api.git
+cd task-manager-api
+```
 
-* Configuration
+##### 2. Edit database.yml file
 
-* Database creation
+Edit the sample database.yml file and edit the database configuration as required.
 
-* Database initialization
+```bash
+cd config/database.yml
+```
 
-* How to run the test suite
+##### 3. Install dependencies
 
-* Services (job queues, cache servers, search engines, etc.)
+Run the following commands to create and setup the database.
 
-* Deployment instructions
+```ruby
+bundle install
+```
 
-* ...
+##### 4. Create and setup the database
+
+Run the following commands to create and setup the database.
+
+```ruby
+rails db:create db:migrate db:seed
+```
+
+##### 5. Start the Rails server
+
+You can start the rails server using the command given below.
+
+```ruby
+rails server
+```
+
+And now you can visit the site with the URL http://localhost:3000
+
+
+### * Tests
+"Os testes foi a parte que tive mais dificuldade para colocar em prática por causa do tempo de estudo dessa etapa, foquei em desenvolver a API com os requisitos que necessitavam ter no desafio." 

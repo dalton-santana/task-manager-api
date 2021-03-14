@@ -5,3 +5,32 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+User.create!(
+    id: 1, 
+    name: Faker::Name.name,
+    email: "teste@teste.com",
+    password: "password", 
+    password_confirmation: "password",
+)
+User.create!(
+    id: 2, 
+    name: Faker::Name.name,
+    email: "teste2@teste.com",
+    password: "password", 
+    password_confirmation: "password",
+)
+
+
+# create 10 tickets in DB
+(1..20).each do |id|
+    Task.create!(
+        id: id,
+        user_id: rand(1..2), 
+        title: Faker::University.name, 
+        status: Faker::Boolean.boolean,
+        is_visible: Faker::Boolean.boolean,
+        description: Faker::Book.name 
+    )
+end

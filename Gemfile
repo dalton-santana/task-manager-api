@@ -55,3 +55,5 @@ gem 'rails-i18n', '~> 5.1'
 gem 'rack-reducer', require: 'rack/reducer'
 
 gem 'rack-cors'
+
+gem 'faker'

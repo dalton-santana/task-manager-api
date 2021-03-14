@@ -4,8 +4,11 @@ class Api::UsersController < ApplicationController
 
     def show
         begin
-            @user = User.find(params[:id])
-            respond_with @user
+            if current_user.id.to_i == params[:id].to_i
+                respond_with current_user
+            else
+                head 401
+            end
         rescue
             head 404
         end

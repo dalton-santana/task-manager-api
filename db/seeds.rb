@@ -23,14 +23,13 @@ User.create!(
 )
 
 
-# create 10 tickets in DB
 (1..20).each do |id|
     Task.create!(
         id: id,
         user_id: rand(1..2), 
-        title: Faker::University.name, 
+        title: Faker::Food.dish, 
         status: Faker::Boolean.boolean,
         is_visible: Faker::Boolean.boolean,
-        description: Faker::Book.name 
+        description: Faker::Food.ingredient 
     )
 end
